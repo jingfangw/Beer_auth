@@ -1,0 +1,4 @@
+<div>Hello {{name}}, </div>
+<br/>
+<div> Your new password is: {{password}} </div>
+<br/>

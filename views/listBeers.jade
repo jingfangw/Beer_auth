@@ -1,0 +1,32 @@
+title = title
+
+div
+  div#header
+     h1 My Beers
+     p
+       a(href='/account') Home</a> &nbsp           
+       a(href='/logout') Logout  
+    
+    div
+      p  
+        a(href='/Orderbeers') Place Order</a> 
+    
+    each beers in myBeers
+      div.textarea
+        h3 
+          div
+            #{beers.brand} (#{beers.type[0].name})
+        p 
+          div
+            #{beers.rating} star rating &nbsp        
+     
+            a(href="/beer/improve/#{beers._id}") +/ 
+            a(href="/beer/reduce/#{beers._id}") - 
+
+        p 
+          small id: 
+            a(href="/beer/id/#{beers._id}") #{beers._id} <br> 
+        p
+          a(href="/beer/remove/#{beers._id}") Remove       
+  
+           

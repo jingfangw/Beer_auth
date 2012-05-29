@@ -1,0 +1,42 @@
+title Register a New User
+
+div
+  div#header
+    h1 Beers
+    p Register as a User
+  
+div
+- if(createAccount)
+  p Account Created! Please proceed to login a(href='/login') here
+- if(error)
+  - if (error=='PasswordDontMatch')
+    h3 Passwords don't match!
+  - if (error=='validEmailRequired')
+    h3 Please enter an valid email address.
+  - if (error=='fillInBlanks')
+    h3 Please fill in all fields.
+
+
+
+div
+  form(action='/register', method='POST')
+    p
+      label(for='email') Email: 
+      input(type='text', name='email', placeholder='email@email.com')
+    p      
+      label(for='password') Password: 
+      input(type='password', name='password', placeholder='password')
+        
+      label(for='password2') Confirm Password:
+      input(type='password', name='password2', placeholder='password')
+    p
+      label(for='name.first') First Name: 
+      input(type='text', name='name.first', placeholder='First Name')
+    
+      label(for='name.last') Last Name: 
+      input(type='text', name='name.last', placeholder='Last Name')
+    p 
+      input(type='submit') Register
+
+div.button 
+  a(href='/') HOME

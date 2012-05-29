@@ -1,0 +1,4 @@
+<div>Hello {{name}}, </div>
+<br/>
+<div> Click to reset your password: <a href={{resetLink}}> Reset Password </a> </div>
+<br/>

@@ -1,0 +1,17 @@
+title= title
+
+div
+  div#header 
+    h1 Beers
+    p Hi, #{currentUser.name.first}!
+  
+
+  div.button 
+    a(href='/beers') Browse List of Beers
+  div.button
+    a(href='/Orderbeers') Order Beers
+  div.button
+    a(href='/account/#{currentUser._id}/change-password') Change Password
+  div.button
+    a(href='/logout') Logout
+

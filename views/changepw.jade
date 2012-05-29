@@ -1,0 +1,29 @@
+title Change Password
+
+div#header
+  h1 Change Password
+  p
+    a(href='/account') Back
+    
+div
+  - if (done)
+    -if(done == 'passwordChanged')
+      b Password Changed!
+    p  
+      b Check your inbox for your new password!
+  - if (error)
+    - if(error == 'passwordDontMatch')
+       p Passwords Don't Match! Try Again.
+
+div
+  form(method= 'POST' , action = '/account/#{currentUser._id}/change-password')
+    p
+      label(for='password') New Password
+      input(type ='password', name ='password1', placeholder='password')
+    p
+      label(for='password') Confirm New Password
+      input(type ='password', name ='password2', placeholder='password')
+    p
+      input(type='submit') Submit
+      
+
