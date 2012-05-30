@@ -10,6 +10,7 @@ var passport = require('passport')
 var BeerModel = require('./models/beer');
 var User = require('./models/user');
 
+
 String.prototype.randomString = function(stringLength) {
   var chars = "0123456789ABCDEFGHIJKLMNOPQRSTUVWXTZabcdefghiklmnopqrstuvwxyz";
   if (!stringLength>0) {

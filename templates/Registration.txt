@@ -1,0 +1,9 @@
+<div> Welcome {{name}}!! </div>
+<br/>
+<div> Thanks for registering with Beers. </div>
+<br/>
+<div> Here is your account information: </div>
+<br/>
+<div> Email: {{email}} </div>
+<div> Password: {{password}} </div>
+<br/>

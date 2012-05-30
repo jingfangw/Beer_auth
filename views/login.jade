@@ -2,25 +2,28 @@ title Login to Beers
 
 div
   div#header
-    h2 Beers
-    p Log In
+    h1 Log In
+    p
+      a(href='/') Home</a> &nbsp    
+      a(href='/register') Register
 
-  div
-    form(action='/login', method='POST')
-      #login.center
-        label(for='email') Email: 
-        input(type='text', name='email', placeholder='email@email.com')
-      
-        label(for='password') Password: 
-        input(type='password', name='password', placeholder='password')
-     
-        input(type='submit', value='Log Me In!') Login
+div
+  - if(createAccount)
+    h3 Account Created! And a confirmation email has been sent.
+    p
+      b You can proceed to login below.
   
-  div.button
-    a(href='/forgot-password') Forgot Password ?     
+
+  form(action='/login', method='POST')
+    #login.center
+      label(for='email') Email: 
+      input(type='text', name='email', placeholder='email@email.com')
+      
+      label(for='password') Password: 
+      input(type='password', name='password', placeholder='password')
+     
+      input(type='submit', value='Log Me In!') Login
+      
+      a(href='/forgot-password') Forgot Password ?     
     
    
-    
-  div.button
-    a(href='/') Home</a> &nbsp    
-     a(href='/register') Register

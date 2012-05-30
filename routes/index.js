@@ -21,6 +21,7 @@ module.exports = {
   	res.render('account.jade', { locals:
   		{ title: 'Beers'
   		, currentUser: req.user
+  		
   		}
   		});
   	},
@@ -28,7 +29,7 @@ module.exports = {
   // app.get('/register'...)
   getRegister: function(req, res) {
     res.render('register.jade',{
-    createAccount: req.query.createAccount,
+    
     error: req.query.error
     }
     );
@@ -37,27 +38,61 @@ module.exports = {
   // app.post('/register'...)
   postRegister: function(req, res) {
   
-  	if(!req.param('email') || !req.param('password') || !req.param('password2') || !req.param('name.first')||!req.param('name.last')){
+  	var email = req.param('email')
+  	  ,	password = req.param('password')
+  	  ,	password2 = req.param('password2')
+  	  ,	firstName = req.param('name.first')
+  	  ,	lastName = req.param('name.last');
+  	
+  
+  	if(!email|| !password || !password2 || !firstName||!lastName){
   		res.redirect('/register/?error=fillInBlanks');
   		}
   	
     	
 	else{
-	if(req.param('password')===req.param('password2')){
+	if( password === password2 ){
     db.saveUser({
-      fname : req.param('name.first')
-    , lname : req.param('name.last')
-    , email : req.param('email')
-    , password : req.param('password')
+      fname : firstName
+    , lname : lastName
+    , email : email
+    , password : password
     }, function(err,docs) {
-      	res.redirect('/account/?createAccount=true');
+    	for(var i =0; i < 1; i++){
+          emailer.send({
+			ssl: true,
+      		host : "smtp.gmail.com",               // smtp server hostname
+      		port : 465,                     // smtp server port
+      		domain : "[127.0.0.1]",             // domain used by client to identify itself to server
+      		to : email,
+      		from : "Management <randomtestacc0@gmail.com>",
+      		subject : "Welcome to Beers!",
+      		template: "./templates/Registration.txt",
+      		data:{
+      			"name": firstName,
+      		    "email": email,
+      		  	"password": password
+      			},
+      		
+      		authentication: "login",
+      		username: "randomtestacc0@gmail.com",
+    		password: "myPassword",
+    		debug: true	
+      	},	
+      		
+   			function(err, result){
+      		if(err){ console.log(err); }
+    		});
+        }
+     	res.redirect('/login/?createAccount=true');
     });
-    } 
+    }
+    	
     else{
     res.redirect('/register/?error=PasswordDontMatch');
-    }   
     }
- 
+  }
+    
   },
 
   // app.get('/about', ...
@@ -67,7 +102,10 @@ module.exports = {
 
   // app.get('/login', ...
   login: function(req, res) {
-    res.render('login.jade');
+    res.render('login.jade', {
+    	createAccount: req.query.createAccount
+    	}
+    );
     
   },
 
@@ -107,7 +145,7 @@ module.exports = {
       		port : 465,                     // smtp server port
       		domain : "[127.0.0.1]",             // domain used by client to identify itself to server
       		to : emailAdd,
-      		from : "wjf1611@gmail.com",
+      		from : "Management <randomtestacc0@gmail.com>",
       		subject : "Password Reset",
       		template: "./templates/templateEmail.txt",
       		data:{
@@ -199,7 +237,7 @@ module.exports = {
       		port : 465,                     // smtp server port
       		domain : "[127.0.0.1]",             // domain used by client to identify itself to server
       		to : emailAdd,
-      		from : "wjf1611@gmail.com",
+      		from : "Management <randomtestacc0@gmail.com>",
       		subject : "Your New Password",
       		template: "./templates/templateEmail2.txt",
       		data:{

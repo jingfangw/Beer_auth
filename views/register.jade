@@ -6,8 +6,6 @@ div
     p Register as a User
   
 div
-- if(createAccount)
-  p Account Created! Please proceed to login a(href='/login') here
 - if(error)
   - if (error=='PasswordDontMatch')
     h3 Passwords don't match!
